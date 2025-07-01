@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CountryListComponent } from './pages/country-list/country-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  imports: [CountryListComponent],
+  template: `<app-country-list />`,
 })
-export class AppComponent {
-  title = 'rest-country-api';
-}
+export class AppComponent {}
