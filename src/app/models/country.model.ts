@@ -10,3 +10,9 @@ export interface Country {
   region: string;
   capital: string[];
 }
+
+// export interface CountryState {
+//   countries: Country[];
+//   loading: boolean;
+//   error: string | null;
+// }

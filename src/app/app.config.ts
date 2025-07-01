@@ -1,9 +1,22 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+// src/app/app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
-import { routes } from './app.routes';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { countriesReducer } from './store/countries/countries.reducer';
+import { CountriesEffects } from './store/countries/countries.effects';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })]
+  providers: [
+    provideHttpClient(),
+
+    // ✅ Provide NgRx Store
+    provideStore({
+      countries: countriesReducer
+    }),
+
+    // ✅ Provide NgRx Effects
+    provideEffects([CountriesEffects])
+  ]
 };
