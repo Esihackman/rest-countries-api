@@ -18,5 +18,15 @@ export const countriesReducer = createReducer(
     ...state,
     loading: false,
     error
-  }))
+  })),
+  on(CountryActions.setSearchQuery, (state, { query }) => ({
+  ...state,
+  searchQuery: query
+})),
+
+on(CountryActions.setFilterRegion, (state, { region }) => ({
+  ...state,
+  filterRegion: region
+}))
+
 );

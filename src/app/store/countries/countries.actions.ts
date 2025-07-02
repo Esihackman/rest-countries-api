@@ -10,3 +10,13 @@ export const loadCountriesFailure = createAction(
   '[Countries] Load Countries Failure',
   props<{ error: string }>()
 );
+
+export const setSearchQuery = createAction(
+  '[Countries] Set Search Query',
+  props<{ query: string }>()
+);
+
+export const setFilterRegion = createAction(
+  '[Countries] Set Filter Region',
+  props<{ region: string }>()
+);

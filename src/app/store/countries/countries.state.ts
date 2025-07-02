@@ -4,10 +4,14 @@ export interface CountriesState {
   countries: Country[];
   loading: boolean;
   error: string | null;
+  searchQuery: string;
+  filterRegion: string;
 }
 
 export const initialCountriesState: CountriesState = {
   countries: [],
   loading: false,
-  error: null
+  error: null,
+  searchQuery: '',
+  filterRegion: ''
 };
