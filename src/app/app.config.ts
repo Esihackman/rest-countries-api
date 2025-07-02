@@ -6,6 +6,7 @@ import { provideEffects } from '@ngrx/effects';
 
 import { countriesReducer } from './store/countries/countries.reducer';
 import { CountriesEffects } from './store/countries/countries.effects';
+import { themeReducer } from './store/theme/theme.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,8 @@ export const appConfig: ApplicationConfig = {
 
     // ✅ Provide NgRx Store
     provideStore({
-      countries: countriesReducer
+      countries: countriesReducer,
+      theme: themeReducer
     }),
 
     // ✅ Provide NgRx Effects

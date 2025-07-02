@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { Observable, combineLatest, map, startWith, BehaviorSubject } from 'rxjs';
+import {
+  Observable,
+  combineLatest,
+  map,
+  BehaviorSubject
+} from 'rxjs';
+
 import { loadCountries } from '../../store/countries/countries.actions';
 import { selectAllCountries, selectLoading } from '../../store/countries/countries.selectors';
 import { Country } from '../../models/country.model';
@@ -53,5 +59,15 @@ export class CountryListComponent implements OnInit {
 
   onRegionChange(region: string): void {
     this.selectedRegion$.next(region);
+  }
+
+  handleSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.onSearchChange(value);
+  }
+
+  handleRegion(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.onRegionChange(value);
   }
 }

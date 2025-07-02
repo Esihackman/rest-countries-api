@@ -1,43 +1,48 @@
-<div class="filters">
- <input
-  type="text"
-  placeholder="Search for a country..."
-  #searchInput
-  (input)="onSearchChange(searchInput.value)"
-/>
-
-<select #regionSelect (change)="onRegionChange(regionSelect.value)">
-  <option value="">All Regions</option>
-  <option value="Africa">Africa</option>
-  <option value="Americas">Americas</option>
-  <option value="Asia">Asia</option>
-  <option value="Europe">Europe</option>
-  <option value="Oceania">Oceania</option>
-</select>
-
-
-</div>
-
-<!-- Your countries list (keep your current country cards block below this) -->
-<div *ngIf="(filteredCountries$ | async) as countries">
-
-  <ng-container *ngIf="countries.length; else noCountries">
-    <div class="country-card" *ngFor="let country of countries">
-      <img
-  *ngIf="country.flags?.svg"
-  [src]="country.flags.svg"
-  [alt]="country.name?.common + ' flag'"
-  width="100"
-/>
-
-      <h3>{{ country.name?.common || 'No Name' }}</h3>
-      <p><strong>Population:</strong> {{ country.population | number }}</p>
-      <p><strong>Region:</strong> {{ country.region || 'Unknown' }}</p>
-      <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
+<div class="country-container">
+  
+  <div class="filters">
+    <!-- Search Input with Icon -->
+    <div class="search-wrapper">
+      <i class="fas fa-search"></i>
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search for a country..."
+        (input)="onSearchChange(searchInput.value)"
+      />
     </div>
-  </ng-container>
 
-  <ng-template #noCountries>
-    <p>No countries found.</p>
-  </ng-template>
+    <!-- Region Filter -->
+    <select #regionSelect (change)="onRegionChange(regionSelect.value)">
+      <option value="">Filter by Region</option>
+      <option value="Africa">Africa</option>
+      <option value="Americas">Americas</option>
+      <option value="Asia">Asia</option>
+      <option value="Europe">Europe</option>
+      <option value="Oceania">Oceania</option>
+    </select>
+  </div>
+
+  <!-- Country Cards -->
+  <div *ngIf="(filteredCountries$ | async) as countries">
+    <ng-container *ngIf="countries.length; else noCountries">
+      <div class="country-grid">
+        <div class="country-card" *ngFor="let country of countries">
+          <img
+            *ngIf="country.flags?.svg"
+            [src]="country.flags.svg"
+            [alt]="country.name?.common + ' flag'"
+          />
+          <h3>{{ country.name?.common || 'No Name' }}</h3>
+          <p><strong>Population:</strong> {{ country.population | number }}</p>
+          <p><strong>Region:</strong> {{ country.region || 'Unknown' }}</p>
+          <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noCountries>
+      <p>No countries found.</p>
+    </ng-template>
+  </div>
 </div>

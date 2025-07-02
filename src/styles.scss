@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fafafa;
+  color: #111;
+}
+
+body.dark-mode {
+  background-color: #202c37;
+  color: #ffffff;
+}
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #fafafa;
+  color: #111517;
+}
+
+body.dark-mode {
+  background-color: #202c37;
+  color: #ffffff;
+}
+
+.country-card {
+  background-color: #ffffff;
+  color: #111517;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  & img {
+    margin-bottom: 1rem;
+  }
+
+  body.dark-mode & {
+    background-color: #2b3945;
+    color: #ffffff;
+  }
+}
