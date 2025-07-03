@@ -1,0 +1,35 @@
+<div class="country-detail" *ngIf="country$ | async as country">
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  <div class="detail-grid">
+    <img [src]="country.flags?.svg" [alt]="country.name?.common + ' flag'" />
+
+    <div class="info">
+      <h2>{{ country.name?.common }}</h2>
+
+      <div class="columns">
+        <!-- Column 1 -->
+        <div class="column">
+          <p><strong>Native Name:</strong> {{ nativeName }}</p>
+          <p><strong>Population:</strong> {{ country.population | number }}</p>
+          <p><strong>Region:</strong> {{ country.region || 'Unknown' }}</p>
+          <p><strong>Sub Region:</strong> {{ country.subregion || 'Unknown' }}</p>
+          <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="column">
+          <p><strong>Top Level Domain:</strong> {{ country.tld?.[0] || 'N/A' }}</p>
+          <p><strong>Currencies:</strong> {{ currencies }}</p>
+          <p><strong>Languages:</strong> {{ languages }}</p>
+        </div>
+      </div>
+
+      <!-- Border countries -->
+      <div *ngIf="country.borders?.length" class="borders">
+        <strong>Border Countries:</strong>
+        <span class="badge" *ngFor="let b of country.borders">{{ b }}</span>
+      </div>
+    </div>
+  </div>
+</div>

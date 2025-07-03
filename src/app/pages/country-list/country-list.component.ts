@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, map } from 'rxjs';
-
+import { RouterModule } from '@angular/router';
 import { Country } from '../../models/country.model';
 import { AppState } from '../../store/app.state';
 import {
@@ -19,7 +19,7 @@ import {
 @Component({
   selector: 'app-country-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './country-list.component.html',
   styleUrls: ['./country-list.component.scss'],
 })
