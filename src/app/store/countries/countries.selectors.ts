@@ -1,31 +1,22 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { AppState } from '../app.state'; 
 import { CountriesState } from './countries.state';
 
-export const selectCountriesState = createFeatureSelector<CountriesState>('countries');
+export const selectCountriesState = (state: AppState) => state.countries;
 
 export const selectAllCountries = createSelector(
   selectCountriesState,
-  (state) => state.countries
-);
-
-export const selectLoading = createSelector(
-  selectCountriesState,
-  (state) => state.loading
-);
-
-export const selectError = createSelector(
-  selectCountriesState,
-  (state) => state.error
+  (state: CountriesState) => state.countries
 );
 
 export const selectSearchQuery = createSelector(
   selectCountriesState,
-  (state) => state.searchQuery
+  (state: CountriesState) => state.searchQuery
 );
 
 export const selectFilterRegion = createSelector(
   selectCountriesState,
-  (state) => state.filterRegion
+  (state: CountriesState) => state.filterRegion
 );
 
 export const selectFilteredCountries = createSelector(
@@ -34,15 +25,15 @@ export const selectFilteredCountries = createSelector(
   selectFilterRegion,
   (countries, searchQuery, filterRegion) => {
     return countries.filter(country => {
-      const matchesSearch = country.name.common
+      const matchesSearch = country.name?.common
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
 
-      const matchesRegion =
-        !filterRegion || country.region?.toLowerCase() === filterRegion.toLowerCase();
+      const matchesRegion = filterRegion
+        ? country.region === filterRegion
+        : true;
 
       return matchesSearch && matchesRegion;
     });
   }
 );
-

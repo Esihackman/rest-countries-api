@@ -5,22 +5,23 @@
     <div class="search-wrapper">
       <i class="fas fa-search"></i>
       <input
-        #searchInput
-        type="text"
-        placeholder="Search for a country..."
-        (input)="onSearchChange(searchInput.value)"
-      />
+  #searchInput
+  type="text"
+  placeholder="Search for a country..."
+  (input)="handleSearch($event)"
+/>
     </div>
 
     <!-- Region Filter -->
-    <select #regionSelect (change)="onRegionChange(regionSelect.value)">
-      <option value="">Filter by Region</option>
-      <option value="Africa">Africa</option>
-      <option value="Americas">Americas</option>
-      <option value="Asia">Asia</option>
-      <option value="Europe">Europe</option>
-      <option value="Oceania">Oceania</option>
-    </select>
+    <select (change)="handleRegion($event)">
+  <option value="">Filter by Region</option>
+  <option value="Africa">Africa</option>
+  <option value="Americas">Americas</option>
+  <option value="Asia">Asia</option>
+  <option value="Europe">Europe</option>
+  <option value="Oceania">Oceania</option>
+</select>
+
   </div>
 
   <!-- Country Cards -->
