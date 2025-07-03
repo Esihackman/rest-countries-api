@@ -1,8 +1,24 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+// src/app/app.config.ts
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
-import { routes } from './app.routes';
+import { countriesReducer } from './store/countries/countries.reducer';
+import { CountriesEffects } from './store/countries/countries.effects';
+import { themeReducer } from './store/theme/theme.reducer';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+  providers: [
+    provideHttpClient(),
+
+    // ✅ Provide NgRx Store
+    provideStore({
+      countries: countriesReducer,
+      theme: themeReducer
+    }),
+
+    // ✅ Provide NgRx Effects
+    provideEffects([CountriesEffects])
+  ]
 };
