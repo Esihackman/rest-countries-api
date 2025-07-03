@@ -1,34 +1,37 @@
 <div class="country-container">
-  
+
   <div class="filters">
     <!-- Search Input with Icon -->
     <div class="search-wrapper">
       <i class="fas fa-search"></i>
       <input
-  #searchInput
-  type="text"
-  placeholder="Search for a country..."
-  (input)="handleSearch($event)"
-/>
+        #searchInput
+        type="text"
+        placeholder="Search for a country..."
+        (input)="handleSearch($event)"
+      />
     </div>
 
     <!-- Region Filter -->
     <select (change)="handleRegion($event)">
-  <option value="">Filter by Region</option>
-  <option value="Africa">Africa</option>
-  <option value="Americas">Americas</option>
-  <option value="Asia">Asia</option>
-  <option value="Europe">Europe</option>
-  <option value="Oceania">Oceania</option>
-</select>
-
+      <option value="">Filter by Region</option>
+      <option value="Africa">Africa</option>
+      <option value="Americas">Americas</option>
+      <option value="Asia">Asia</option>
+      <option value="Europe">Europe</option>
+      <option value="Oceania">Oceania</option>
+    </select>
   </div>
 
   <!-- Country Cards -->
   <div *ngIf="(filteredCountries$ | async) as countries">
     <ng-container *ngIf="countries.length; else noCountries">
       <div class="country-grid">
-        <div class="country-card" *ngFor="let country of countries">
+        <a
+          class="country-card"
+          *ngFor="let country of countries"
+          [routerLink]="['/country', country.name.common]"
+        >
           <img
             *ngIf="country.flags?.svg"
             [src]="country.flags.svg"
@@ -38,7 +41,7 @@
           <p><strong>Population:</strong> {{ country.population | number }}</p>
           <p><strong>Region:</strong> {{ country.region || 'Unknown' }}</p>
           <p><strong>Capital:</strong> {{ country.capital?.[0] || 'N/A' }}</p>
-        </div>
+        </a>
       </div>
     </ng-container>
 
