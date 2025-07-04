@@ -1,3 +1,3 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export const toggleDarkMode = createAction('[Theme] Toggle Dark Mode');
+export const toggleTheme = createAction('[Theme] toggle Dark Mode');

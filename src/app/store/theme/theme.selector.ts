@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ThemeState } from './theme.state';
+import { ThemeState } from '../../models/theme';
 
 export const selectThemeState = createFeatureSelector<ThemeState>('theme');
 
-export const selectDarkMode = createSelector(
+export const selectTheme = createSelector(
   selectThemeState,
-  (state) => state.darkMode
+  (state: ThemeState) => state.isDarkMode
 );

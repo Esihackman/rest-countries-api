@@ -1,0 +1,30 @@
+.country-card {
+  margin: 10px;
+  border-radius: 5px;
+  background-color: var(--card-bg);
+  cursor: pointer;
+}
+
+.country-card p {
+  margin: 5px 0;
+}
+
+.country-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.country-card .country-info {
+  padding: 10px;
+}
+
+.country-card img {
+  width: 100%;
+  height: 150px;
+}
+
+@media screen and (min-width: 600px) {
+  .country-card img {
+    height: 125px;
+  }
+}

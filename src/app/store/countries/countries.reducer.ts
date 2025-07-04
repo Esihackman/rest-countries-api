@@ -1,32 +1,64 @@
 import { createReducer, on } from '@ngrx/store';
-import { CountriesState, initialCountriesState } from './countries.state';
-import * as CountryActions from './countries.actions';
+import {
+  loadCountries,
+  loadCountriesSuccess,
+  loadCountrySuccess,
+  loadCountry,
+  loadFilterCountries,
+  setSelectedRegion,
+} from './countries.actions';
+import { CountryState } from '../../models/country';
+import { searchCountry } from '../user/user.actions';
 
-export const countriesReducer = createReducer(
-  initialCountriesState,
-  on(CountryActions.loadCountries, (state) => ({
+const initialState: CountryState = {
+  countries: [],
+  filteredCountries: [],
+  loading: false,
+  selectedRegion: '',
+  // error: null
+};
+
+export const countryReducer = createReducer(
+  initialState,
+  on(loadCountries, (state) => ({ ...state, loading: true })),
+  on(loadCountrySuccess, (state, { country }) => ({
     ...state,
-    loading: true,
-    error: null
-  })),
-  on(CountryActions.loadCountriesSuccess, (state, { countries }) => ({
-    ...state,
-    countries,
-    loading: false
-  })),
-  on(CountryActions.loadCountriesFailure, (state, { error }) => ({
-    ...state,
+    country,
     loading: false,
-    error
   })),
-  on(CountryActions.setSearchQuery, (state, { query }) => ({
-  ...state,
-  searchQuery: query
-})),
+  on(loadCountriesSuccess, (state, { countries }) => {
+    return {
+      ...state,
+      countries,
+      filteredCountries: countries,
+      loading: false,
+    };
+  }),
+  on(loadFilterCountries, (state, { countries }) => {
+    return {
+      ...state,
+      filteredCountries: countries,
+    };
+  }),
 
-on(CountryActions.setFilterRegion, (state, { region }) => ({
-  ...state,
-  filterRegion: region
-}))
+  on(searchCountry, (state, { query }) => ({
+    ...state,
+    filteredCountries: state.countries.filter((country) =>
+      country.name.common.toLowerCase().includes(query.toLowerCase())
+    ),
+  })),
 
+  on(setSelectedRegion, (state, { region }) => ({
+    ...state,
+    selectedRegion: region,
+    filteredCountries: region
+      ? state.countries.filter((country) => country.region === region)
+      : state.countries,
+  }))
+  // on(loadCountry, (state) => {
+  //   return {
+  //     ...state,
+  //     loading: true,
+  //   };
+  // })
 );

@@ -1,0 +1,70 @@
+<!-- <div>
+  {{ country$ | async | json }}
+</div> -->
+
+<main class="container">
+  <div class="content">
+    <button class="back-btn" (click)="goBack()">← Back</button>
+
+    <section class="info-section">
+      <!-- <h1 class="country-name">Belgium</h1> -->
+      @if(country$ | async; as country) {
+      <div class="info-columns">
+        <section class="flag-section">
+          <img src="{{ country.flags.png }}" alt="Flag of Belgium" />
+        </section>
+
+        <div class="column">
+          <h1 class="country-name">{{ country.name.common }}</h1>
+          <p><strong>Native Name: </strong>{{ country.name.common }}</p>
+          <p><strong>Population:</strong>{{ country.population }}</p>
+          <p><strong>Region:</strong> {{ country.region }}</p>
+          <p><strong>Sub Region: </strong>{{ country.subregion }}</p>
+          <p><strong>Capital: </strong>{{ country.capital }}</p>
+          <div class="column mobile-column">
+            <p><strong>Top Level Domain: </strong>{{ country.tld }}</p>
+            <p>
+              <strong>Currencies:</strong>
+              @for( currency of country.currencies | keyvalue; track
+              currency.key){
+              {{ currency.value.name }}
+              }
+            </p>
+            <p>
+              <strong>Languages:</strong> @for(lang of country.languages |
+              keyvalue; track lang.key){ {{ lang.value
+              }}<span *ngIf="!$last">, </span> }
+            </p>
+          </div>
+          <div class="borders">
+            <p><strong>Border Countries:</strong></p>
+            <div class="border-tags">
+              @for(border of country.borders; track border) {
+              <span (click)="showBorderCountryDetails(border)">{{
+                border
+              }}</span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="column desktop-column">
+          <p><strong>Top Level Domain: </strong>{{ country.tld }}</p>
+          <p>
+            <strong>Currencies:</strong>
+            @for( currency of country.currencies | keyvalue; track
+            currency.key){
+            {{ currency.value.name }}
+            }
+          </p>
+          <p>
+            <strong>Languages:</strong> @for(lang of country.languages |
+            keyvalue; track lang.key){ {{ lang.value
+            }}<span *ngIf="!$last">, </span> }
+          </p>
+        </div>
+      </div>
+      }
+    </section>
+  </div>
+</main>

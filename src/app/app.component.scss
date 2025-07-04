@@ -1,0 +1,25 @@
+:root {
+  --light-bg: #f2f2f2;
+  --light-text: #202c36;
+  --light-header-bg: #ffffff;
+
+  --dark-bg: #202c36;
+  --dark-text: #f2f2f2;
+  --dark-header-bg: #2c3e50;
+
+  --bg: var(--light-bg);
+  --text: var(--light-text);
+  --header-bg: var(--light-header-bg);
+}
+
+body {
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  margin-top: 50px;
+  padding: 20px;
+}

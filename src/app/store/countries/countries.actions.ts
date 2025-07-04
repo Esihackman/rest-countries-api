@@ -1,22 +1,24 @@
 import { createAction, props } from '@ngrx/store';
-import { Country } from '../../models/country.model';
+import { Country } from '../../models/country';
 
-export const loadCountries = createAction('[Countries] Load Countries');
-export const loadCountriesSuccess = createAction(
-  '[Countries] Load Countries Success',
+export const loadCountries = createAction('[Countries API] Load Countries');
+export const loadFilterCountries = createAction(
+  '[Countries API] Filter Countries',
   props<{ countries: Country[] }>()
 );
-export const loadCountriesFailure = createAction(
-  '[Countries] Load Countries Failure',
-  props<{ error: string }>()
+export const loadCountriesSuccess = createAction(
+  '[Countries API] Load Countries Success',
+  props<{ countries: Country[] }>()
 );
-
-export const setSearchQuery = createAction(
-  '[Countries] Set Search Query',
-  props<{ query: string }>()
+export const loadCountrySuccess = createAction(
+  '[Countries API] Load Country Success',
+  props<{ country: Country }>()
 );
-
-export const setFilterRegion = createAction(
-  '[Countries] Set Filter Region',
+export const loadCountry = createAction(
+  '[Countries API] Load Country',
+  props<{ id: string }>()
+);
+export const setSelectedRegion = createAction(
+  '[Countries API] Set Selected Region',
   props<{ region: string }>()
 );

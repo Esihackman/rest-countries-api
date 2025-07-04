@@ -1,0 +1,31 @@
+<form class="search-filter" aria-label="Search and Filter Section">
+  <label for="country-search" class="visually-hidden"
+    >Search for a country</label
+  >
+
+  <input
+    type="text"
+    id="country-search"
+    class="search-input"
+    placeholder="Search for a country…"
+    aria-label="Search for a country"
+    (input)="onInputChange($event)"
+  />
+
+  <label for="region-filter" class="visually-hidden">Filter by region</label>
+  <select
+    id="region-filter"
+    class="filter-dropdown"
+    name="region"
+    aria-label="Filter by region"
+     [(ngModel)]="selectedRegion"
+    (change)="onRegionChange(selectedRegion)"
+  >
+    <option value="" disabled>Filter by Region</option>
+    <option value="Africa">Africa</option>
+    <option value="America">America</option>
+    <option value="Asia">Asia</option>
+    <option value="Europe">Europe</option>
+    <option value="Oceania">Oceania</option>
+  </select>
+</form>

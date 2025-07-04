@@ -1,25 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { toggleDarkMode } from '../../store/theme/theme.actions';
-import { selectDarkMode } from '../../store/theme/theme.selectors';
+import { toggleTheme } from '../../store/theme/theme.actions';
+import { selectTheme } from '../../store/theme/theme.selector';
+import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule],
+  imports: [AsyncPipe],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  darkMode$: Observable<boolean>;
+  public store = inject(Store);
+  themeToggle$!: Observable<boolean>;
 
-  constructor(private store: Store) {
-    this.darkMode$ = this.store.select(selectDarkMode);
+  toggleTheme() {
+    this.store.dispatch(toggleTheme());
+    this.themeToggle$ = this.store.select(selectTheme);
+    this.themeToggle$.subscribe((isDarkMode: boolean) => {
+      document.body.classList.toggle('dark-mode', isDarkMode);
+      this.setHeaderBg(isDarkMode ? '#2c3e50' : '#ffffff');
+    });
   }
 
-  toggleTheme(): void {
-    this.store.dispatch(toggleDarkMode());
+  setHeaderBg(color: string) {
+    document.documentElement.style.setProperty('--header-bg', color);
+    document.documentElement.style.setProperty('--card-bg', color);
   }
 }

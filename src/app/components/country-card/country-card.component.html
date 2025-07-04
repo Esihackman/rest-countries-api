@@ -1,0 +1,11 @@
+<div class="country-card" (click)="onSelect(country.cca3)">
+  <img [src]="country.flags.png" [alt]="country.flags.alt" />
+  <div class="country-info">
+    <h3>{{ country.name.common }}</h3>
+    <small><b>Population:</b> {{ country.population }}</small
+    ><br />
+    <small><b>Region: </b>{{ country.region }}</small
+    ><br />
+    <small><b>Capital: </b>{{ country.capital }}</small>
+  </div>
+</div>

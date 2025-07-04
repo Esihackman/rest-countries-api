@@ -1,24 +1,32 @@
-// src/app/app.config.ts
-import { ApplicationConfig } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-import { countriesReducer } from './store/countries/countries.reducer';
-import { CountriesEffects } from './store/countries/countries.effects';
+import { routes } from './app.routes';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideHttpClient } from '@angular/common/http';
+import { countryReducer } from './store/countries/countries.reducer';
+// Update the import path to match the actual file name, e.g., 'countries.effects' if that's correct
+import { CountryEffects } from './store/countries/countries.effect';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { themeReducer } from './store/theme/theme.reducer';
+import { UserReducer } from './store/user/user.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
-
-    // ✅ Provide NgRx Store
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideEffects([CountryEffects]),
     provideStore({
-      countries: countriesReducer,
-      theme: themeReducer
+      countries: countryReducer,
+      theme: themeReducer,
+      user: UserReducer,
     }),
-
-    // ✅ Provide NgRx Effects
-    provideEffects([CountriesEffects])
-  ]
+    provideHttpClient(),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 };

@@ -1,0 +1,17 @@
+.country-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 600px) {
+  .country-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .country-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
