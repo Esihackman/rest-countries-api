@@ -10,7 +10,7 @@ applications:
           commands:
             - npm run build -- --configuration production
       artifacts:
-        baseDirectory: dist/rest-country-api
+        baseDirectory: dist/rest-country-api/browser
         files:
           - '**/*'
       cache:
