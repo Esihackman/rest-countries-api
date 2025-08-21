@@ -15,7 +15,7 @@ const initialState: CountryState = {
   filteredCountries: [],
   loading: false,
   selectedRegion: '',
-  // error: null
+  
 };
 
 export const countryReducer = createReducer(
@@ -55,10 +55,5 @@ export const countryReducer = createReducer(
       ? state.countries.filter((country) => country.region === region)
       : state.countries,
   }))
-  // on(loadCountry, (state) => {
-  //   return {
-  //     ...state,
-  //     loading: true,
-  //   };
-  // })
+  
 );

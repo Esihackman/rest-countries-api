@@ -19,7 +19,5 @@ export class CountryService {
     return this.http.get<Country[]>(`${environment.countriesApiBaseUrl}/alpha/${code}`);
   }
 
-  // getCountriesBySearch(query: string) {
-
-  // }
+ 
 }
