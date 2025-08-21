@@ -1,0 +1,22 @@
+version: 1
+applications:
+  - appRoot: .
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build -- --configuration production
+      artifacts:
+        baseDirectory: dist/rest-country-api
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+    rewrites:
+      - source: /<*>
+        target: /index.html
+        status: 200
